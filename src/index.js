@@ -705,6 +705,9 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
     }
 
     const makePadRow = (row, i) => {
+      if (i === 0 && !pageRows.length) {
+        return null
+      }
       const trGroupProps = getTrGroupProps(finalState, undefined, undefined, this)
       const trProps = _.splitProps(getTrProps(finalState, undefined, undefined, this))
       return (
@@ -844,15 +847,15 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
             >
               {pageRows.map((d, i) => makePageRow(d, i))}
               {padRows.map(makePadRow)}
+              {!pageRows.length && (
+                <NoDataComponent {...noDataProps}>{_.normalizeComponent(noDataText)}</NoDataComponent>
+              )}
             </TbodyComponent>
             {hasColumnFooter ? makeColumnFooters() : null}
           </TableComponent>
           {showPagination && showPaginationBottom ? (
             <div className="pagination-bottom">{pagination}</div>
           ) : null}
-          {!pageRows.length && (
-            <NoDataComponent {...noDataProps}>{_.normalizeComponent(noDataText)}</NoDataComponent>
-          )}
           <LoadingComponent loading={loading} loadingText={loadingText} {...loadingProps} />
         </div>
       )
