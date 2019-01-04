@@ -1655,6 +1655,7 @@ var defaultProps = {
       children
     );
   },
+  ConfigComponent: null,
   TheadComponent: _.makeTemplateComponent('rt-thead', 'Thead'),
   TbodyComponent: _.makeTemplateComponent('rt-tbody', 'Tbody'),
   TrGroupComponent: function TrGroupComponent(_ref2) {
@@ -2708,6 +2709,7 @@ var propTypes$1 = {
   sortable: propTypes.bool,
   resizable: propTypes.bool,
   filterable: propTypes.bool,
+  configurable: propTypes.bool,
   defaultSortDesc: propTypes.bool,
   defaultSorted: propTypes.array,
   defaultFiltered: propTypes.array,
@@ -2723,6 +2725,7 @@ var propTypes$1 = {
   onFilteredChange: propTypes.func,
   onResizedChange: propTypes.func,
   onExpandedChange: propTypes.func,
+  onConfigChange: propTypes.func,
 
   // Pivoting
   pivotBy: propTypes.array,
@@ -2747,6 +2750,7 @@ var propTypes$1 = {
   // Component decorators
   getProps: propTypes.func,
   getTableProps: propTypes.func,
+  getConfigProps: propTypes.func,
   getTheadGroupProps: propTypes.func,
   getTheadGroupTrProps: propTypes.func,
   getTheadGroupThProps: propTypes.func,
@@ -2830,6 +2834,7 @@ var propTypes$1 = {
 
   // Components
   TableComponent: propTypes.oneOfType([propTypes.func, propTypes.element]),
+  ConfigComponent: propTypes.element,
   TheadComponent: propTypes.oneOfType([propTypes.func, propTypes.element]),
   TbodyComponent: propTypes.oneOfType([propTypes.func, propTypes.element]),
   TrGroupComponent: propTypes.oneOfType([propTypes.func, propTypes.element]),
@@ -2935,6 +2940,7 @@ var ReactTable = function (_Methods) {
           multiSort = resolvedState.multiSort,
           resizable = resolvedState.resizable,
           filterable = resolvedState.filterable,
+          configurable = resolvedState.configurable,
           pivotIDKey = resolvedState.pivotIDKey,
           pivotValKey = resolvedState.pivotValKey,
           pivotBy = resolvedState.pivotBy,
@@ -2953,6 +2959,7 @@ var ReactTable = function (_Methods) {
           pages = resolvedState.pages,
           onExpandedChange = resolvedState.onExpandedChange,
           TableComponent = resolvedState.TableComponent,
+          ConfigComponent = resolvedState.ConfigComponent,
           TheadComponent = resolvedState.TheadComponent,
           TbodyComponent = resolvedState.TbodyComponent,
           TrGroupComponent = resolvedState.TrGroupComponent,
@@ -3096,6 +3103,10 @@ var ReactTable = function (_Methods) {
             column: column
           })
         );
+      };
+
+      var makeConfig = function makeConfig() {
+        return ConfigComponent;
       };
 
       var makeHeaderGroups = function makeHeaderGroups() {
@@ -3592,6 +3603,7 @@ var ReactTable = function (_Methods) {
               className: classnames(tableProps.className, currentlyResizing ? 'rt-resizing' : ''),
               style: tableProps.style
             }, tableProps.rest),
+            configurable ? makeConfig() : null,
             hasHeaderGroups ? makeHeaderGroups() : null,
             makeHeaders(),
             hasFilters ? makeFilters() : null,

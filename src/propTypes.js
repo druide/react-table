@@ -18,6 +18,7 @@ export default {
   sortable: PropTypes.bool,
   resizable: PropTypes.bool,
   filterable: PropTypes.bool,
+  configurable: PropTypes.bool,
   defaultSortDesc: PropTypes.bool,
   defaultSorted: PropTypes.array,
   defaultFiltered: PropTypes.array,
@@ -33,6 +34,7 @@ export default {
   onFilteredChange: PropTypes.func,
   onResizedChange: PropTypes.func,
   onExpandedChange: PropTypes.func,
+  onConfigChange: PropTypes.func,
 
   // Pivoting
   pivotBy: PropTypes.array,
@@ -57,6 +59,7 @@ export default {
   // Component decorators
   getProps: PropTypes.func,
   getTableProps: PropTypes.func,
+  getConfigProps: PropTypes.func,
   getTheadGroupProps: PropTypes.func,
   getTheadGroupTrProps: PropTypes.func,
   getTheadGroupThProps: PropTypes.func,
@@ -142,6 +145,7 @@ export default {
 
   // Components
   TableComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  ConfigComponent: PropTypes.element,
   TheadComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
   TbodyComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
   TrGroupComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),

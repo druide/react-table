@@ -185,6 +185,7 @@ export default {
       {children}
     </div>
   ),
+  ConfigComponent: null,
   TheadComponent: _.makeTemplateComponent('rt-thead', 'Thead'),
   TbodyComponent: _.makeTemplateComponent('rt-tbody', 'Tbody'),
   TrGroupComponent: ({ children, className, ...rest }) => (

@@ -83,6 +83,7 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
       multiSort,
       resizable,
       filterable,
+      configurable,
       // Pivoting State
       pivotIDKey,
       pivotValKey,
@@ -104,6 +105,7 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
       onExpandedChange,
       // Components
       TableComponent,
+      ConfigComponent,
       TheadComponent,
       TbodyComponent,
       TrGroupComponent,
@@ -255,6 +257,8 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
         </ThComponent>
       )
     }
+
+    const makeConfig = () => ConfigComponent
 
     const makeHeaderGroups = () => {
       const theadGroupProps = _.splitProps(
@@ -834,6 +838,7 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
             style={tableProps.style}
             {...tableProps.rest}
           >
+            {configurable ? makeConfig() : null}
             {hasHeaderGroups ? makeHeaderGroups() : null}
             {makeHeaders()}
             {hasFilters ? makeFilters() : null}
